@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 261c889b682e3a24f96b6dee52b00e39
+timeCreated: 1523352661
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Klavika
+  fontNames:
+  - Klavika
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 22922344ad56d9e46a3cad5a68bf635a, type: 3}
+  - {fileID: 12800000, guid: 22af10ad301c81d4f8c742e1f3de0b21, type: 3}
+  - {fileID: 12800000, guid: 07a2cfceae26eff45b7701e86c35d21a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

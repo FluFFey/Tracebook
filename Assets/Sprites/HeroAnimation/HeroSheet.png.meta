@@ -1,0 +1,1387 @@
+fileFormatVersion: 2
+guid: 61b55317d597c034d9d357980254b7bd
+timeCreated: 1510399660
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: HeroSheet_0
+    21300002: HeroSheet_1
+    21300004: HeroSheet_2
+    21300006: HeroSheet_3
+    21300008: HeroSheet_4
+    21300010: HeroSheet_5
+    21300012: HeroSheet_6
+    21300014: HeroSheet_7
+    21300016: HeroSheet_8
+    21300018: HeroSheet_9
+    21300020: HeroSheet_10
+    21300022: HeroSheet_11
+    21300024: HeroSheet_12
+    21300026: HeroSheet_13
+    21300028: HeroSheet_14
+    21300030: HeroSheet_15
+    21300032: HeroSheet_16
+    21300034: HeroSheet_17
+    21300036: HeroSheet_18
+    21300038: HeroSheet_19
+    21300040: HeroSheet_20
+    21300042: HeroSheet_21
+    21300044: HeroSheet_22
+    21300046: HeroSheet_23
+    21300048: HeroSheet_24
+    21300050: HeroSheet_25
+    21300052: HeroSheet_26
+    21300054: HeroSheet_27
+    21300056: HeroSheet_28
+    21300058: HeroSheet_29
+    21300060: HeroSheet_30
+    21300062: HeroSheet_31
+    21300064: HeroSheet_32
+    21300066: HeroSheet_33
+    21300068: HeroSheet_34
+    21300070: HeroSheet_35
+    21300072: HeroSheet_36
+    21300074: HeroSheet_37
+    21300076: HeroSheet_38
+    21300078: HeroSheet_39
+    21300080: HeroSheet_40
+    21300082: HeroSheet_41
+    21300084: HeroSheet_42
+    21300086: HeroSheet_43
+    21300088: HeroSheet_44
+    21300090: HeroSheet_45
+    21300092: HeroSheet_46
+    21300094: HeroSheet_47
+    21300096: HeroSheet_48
+    21300098: HeroSheet_49
+    21300100: HeroSheet_50
+    21300102: HeroSheet_51
+    21300104: HeroSheet_52
+    21300106: HeroSheet_53
+    21300108: HeroSheet_54
+    21300110: HeroSheet_55
+    21300112: HeroSheet_56
+    21300114: HeroSheet_57
+    21300116: HeroSheet_58
+    21300118: HeroSheet_59
+    21300120: HeroSheet_60
+    21300122: HeroSheet_61
+    21300124: HeroSheet_62
+    21300126: HeroSheet_63
+    21300128: HeroSheet_64
+    21300130: HeroSheet_65
+    21300132: HeroSheet_66
+    21300134: HeroSheet_67
+    21300136: HeroSheet_68
+    21300138: HeroSheet_69
+    21300140: HeroSheet_70
+    21300142: HeroSheet_71
+    21300144: HeroSheet_72
+    21300146: HeroSheet_74
+    21300148: HeroSheet_75
+    21300150: HeroSheet_76
+    21300152: HeroSheet_77
+    21300154: HeroSheet_78
+    21300156: HeroSheet_79
+    21300158: HeroSheet_80
+    21300160: HeroSheet_81
+    21300162: HeroSheet_82
+    21300164: HeroSheet_83
+    21300166: HeroSheet_84
+    21300168: HeroSheet_85
+    21300170: HeroSheet_73
+    21300172: HeroSheet_86
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: -1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HeroSheet_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 316
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 317
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_2
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 316
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_3
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 316
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_4
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 319
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_5
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 316
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_6
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 318
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_7
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 318
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_8
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 318
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_9
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 318
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_10
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 289
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_11
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 289
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_12
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 288
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_13
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 290
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_14
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 291
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_15
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 290
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_16
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 260
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_17
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 262
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_18
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 260
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_19
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 263
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_20
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 266
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_21
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 264
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_22
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 233
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_23
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 234
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_24
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 233
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_25
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 237
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_26
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 238
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_27
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 237
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_28
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 228
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_29
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 228
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_30
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 214
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_31
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 199
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_32
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 186
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_33
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 186
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_34
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 176
+        width: 19
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_35
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 176
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_36
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 176
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_37
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 171
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_38
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 171
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_39
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 171
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_40
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 171
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_41
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 159
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_42
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 160
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_43
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 159
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_44
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 160
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_45
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 144
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_46
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 142
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_47
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 142
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_48
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 142
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_49
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 117
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_50
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 117
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_51
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 117
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_52
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 108
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_53
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 108
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_54
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 108
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_55
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 107
+        width: 21
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_56
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 108
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_57
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 108
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_58
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 108
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_59
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 89
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_60
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 75
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_61
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 75
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_62
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 75
+        width: 21
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_63
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 74
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_64
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 74
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_65
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 74
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_66
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 74
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_67
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 74
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_68
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 60
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_69
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 60
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_70
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 60
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_71
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 60
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_72
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 32
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_74
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 42
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_75
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 40
+        width: 42
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_76
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 42
+        width: 47
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_77
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 40
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_78
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 4
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_79
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 4
+        width: 20
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_80
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 4
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_81
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 24
+        width: 59
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_82
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 8
+        width: 26
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_83
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 10
+        width: 36
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_84
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 11
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_85
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 10
+        width: 30
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_73
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 235
+        width: 74
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HeroSheet_86
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 228
+        width: 72
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

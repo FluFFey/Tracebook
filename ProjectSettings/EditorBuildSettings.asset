@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level0.unity
     guid: bfcfa07b6357aec4bb2245c7abf9ced8
+  - enabled: 1
+    path: Assets/Scenes/Discussion.unity
+    guid: c445388798fc5d8458c774207a35a0b4

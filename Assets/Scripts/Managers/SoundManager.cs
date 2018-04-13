@@ -8,10 +8,12 @@ public class SoundManager : MonoBehaviour {
     private SoundCaller sc;
 
     public AudioClip newMessageSound;
+    public AudioClip sharedLocationSound;
 
     public enum SOUNDS
     {
-        NEW_MESSAGE
+        NEW_MESSAGE,
+        SHARED_LOCATION
     }
 
     // Use this for initialization
@@ -36,6 +38,9 @@ public class SoundManager : MonoBehaviour {
         {
             case SOUNDS.NEW_MESSAGE:
                 clipToPlay = newMessageSound;
+                break;
+            case SOUNDS.SHARED_LOCATION:
+                clipToPlay = sharedLocationSound;
                 break;
             default:
                 print("invalid sound requested");

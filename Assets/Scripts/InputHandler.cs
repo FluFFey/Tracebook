@@ -53,8 +53,11 @@ public class InputHandler : NetworkBehaviour
     public GameObject messagesPanel; //UI-panel where text messages appear
     public GameObject messagePrefab; //Prefab for message popup
     public Sprite flippedBubbleImage;
+    public GameObject phoneCanvas;
+
     private void Awake()
     {
+        phoneCanvas = GameObject.Find("PhoneCanvas");
         if (messageDictionary == null)
         {
             messageDictionary = new Dictionary<TEXT_MESSAGES, string>();
@@ -163,9 +166,19 @@ public class InputHandler : NetworkBehaviour
         {
             SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
             Cmd_sendTextMessage(TEXT_MESSAGES.HELP);
-            
-
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (phoneCanvas.activeSelf)
+            {
+                phoneCanvas.SetActive(false);
+            }
+            else
+            {
+                phoneCanvas.SetActive(true);
+            }
+        }
+
     }
 
     [Command]
@@ -185,6 +198,7 @@ public class InputHandler : NetworkBehaviour
     [ClientRpc]
     void Rpc_setLocationSharerColor(GameObject locationShareGO, Color newColor)
     {
+        SoundManager.instance.playSound(SoundManager.SOUNDS.SHARED_LOCATION);
         locationShareGO.GetComponent<SpriteRenderer>().color = newColor;
     }
 

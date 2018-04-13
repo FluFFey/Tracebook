@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 114620002548321808}
   - component: {fileID: 114472899149796128}
   - component: {fileID: 114849994102604956}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Hero
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -279,6 +279,7 @@ MonoBehaviour:
   messagePrefab: {fileID: 1682817401334076, guid: f076c6aa8a58d61479290f6b34ad953c,
     type: 2}
   flippedBubbleImage: {fileID: 21300000, guid: dd021ebb51d6455438146fc371fc6b01, type: 3}
+  phoneCanvas: {fileID: 0}
 --- !u!114 &114472899149796128
 MonoBehaviour:
   m_ObjectHideFlags: 1

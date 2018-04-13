@@ -160,6 +160,7 @@ public class TextPulse : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         
         yield return MusicManager.instance.silenceMusic(1.75f);
         yield return new WaitForSeconds(0.8f);
-        LevelManager.instance.loadLevel(0);
+        //LevelManager.instance.loadLevel(0);
+        MyServerManager.instance.changeScene("level0");
     }
 }

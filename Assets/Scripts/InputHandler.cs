@@ -1,5 +1,7 @@
 ﻿//using System;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -11,7 +13,18 @@ public class InputHandler : NetworkBehaviour
         MOVING,
         DISABLED,
         NO_OF_STATES
-    }    
+    }
+
+    public enum TEXT_MESSAGES
+    {
+        GATHER_HERE,
+        HELP,
+        RUN,
+        GOOD_JOB
+    }
+
+    private static Dictionary<TEXT_MESSAGES,string> messageDictionary;
+
 
     enum MOVE_DIRECTION
     {
@@ -26,6 +39,7 @@ public class InputHandler : NetworkBehaviour
     }
     int moveDirection;
     public int moveSpeed = 1;
+    public GameObject sharedLocationGO;
 
     private Vector2 newVelocity;
     public HERO_STATE state;
@@ -33,14 +47,34 @@ public class InputHandler : NetworkBehaviour
     
     private SoundCaller sc;
     private Rigidbody2D rb2d;
-
+    [SyncVar]
+    private Color sphereColor;
     private Vector2 lastDirection;
+
     private void Awake()
     {
+        if (messageDictionary != null)
+        {
+            messageDictionary = new Dictionary<TEXT_MESSAGES, string>();
+            messageDictionary[TEXT_MESSAGES.GATHER_HERE] = "I found something";
+            messageDictionary[TEXT_MESSAGES.HELP] = "Help me!";
+            messageDictionary[TEXT_MESSAGES.RUN] = "Run";
+            messageDictionary[TEXT_MESSAGES.GOOD_JOB] = "Well done";
+        }
         moveDirection = (int)MOVE_DIRECTION.LEFT;
         rb2d = GetComponent<Rigidbody2D>();
         sc = GetComponent<SoundCaller>();
         lastDirection = Vector2.right;
+        
+    }
+
+    private void Start()
+    {
+        MeshRenderer sphereMeshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+        MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
+        sphereMeshRenderer.GetPropertyBlock(propBlock);
+        propBlock.SetColor("_Color", sphereColor);
+        sphereMeshRenderer.SetPropertyBlock(propBlock);
     }
 
     bool isCollidingWithFloor(Vector3 point)
@@ -110,11 +144,39 @@ public class InputHandler : NetworkBehaviour
                 break;
             case (int)MOVE_DIRECTION.DOWNRIGHT:
                 transform.eulerAngles = new Vector3(0, 0, 175.0f);
-
                 break;
             default:
                 break;
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Cmd_createLocationSharer();
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Cmd_sendTextMessage(TEXT_MESSAGES.HELP);
+        }
+    }
+
+    [Command]
+    void Cmd_createLocationSharer()
+    {
+        GameObject go = Instantiate(sharedLocationGO, transform.position, Quaternion.identity);
+        NetworkServer.Spawn(go);
+        float locationShareLifetime = 10.0f;
+        Destroy(go, locationShareLifetime);
+    }
+
+
+    [Command]
+    void Cmd_sendTextMessage(TEXT_MESSAGES messageType)
+    {
+
+    }
+
+    internal void setColor(Color color)
+    {
+        sphereColor = color;
     }
 
     private void updateCamera()
@@ -142,6 +204,10 @@ public class InputHandler : NetworkBehaviour
 
     void FixedUpdate ()
     {
+        if(!hasAuthority)
+        {
+            return;
+        }
         fixedDt = TimeManager.instance.fixedGameDeltaTime;
 
         newVelocity = Vector2.zero;

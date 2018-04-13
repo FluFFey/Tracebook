@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopTime: 1
-  bounceDist: 0.06
+  bounceDist: 0.1
 --- !u!212 &212310502239368088
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -121,7 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 24bfb9e9327e126498e44f2b7bec6e3e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 171ad68070136e4438076efe64edb0f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

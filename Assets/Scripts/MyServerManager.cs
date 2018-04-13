@@ -10,6 +10,7 @@ public class MyServerManager : NetworkBehaviour {
     public GameObject playerCharacterPrefab;
     public GameObject networkManager;
     Color[] playerColors;
+    
     void Awake()
     {
         if (instance == null)
@@ -21,7 +22,7 @@ public class MyServerManager : NetworkBehaviour {
             DestroyObject(gameObject);
         }
         DontDestroyOnLoad(this);
-        playerColors = new Color[]
+        playerColors = new Color[] //apparently warcraft 3 colors 
         {
             Color.red,
             Color.blue,
@@ -50,12 +51,10 @@ public class MyServerManager : NetworkBehaviour {
     {
         networkManager.GetComponent<NetworkManager>().ServerChangeScene(sceneName);
         //Rpc_startGame();
-        
 
         foreach (NetworkConnection connection in NetworkServer.connections)
         {
             StartCoroutine(waitForClientSceneChange(connection,connection.connectionId));
-            
         }
     }
 

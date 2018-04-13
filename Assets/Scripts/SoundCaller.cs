@@ -66,11 +66,14 @@ public class SoundCaller : MonoBehaviour
     }
 
     //returns true if sound was played
-    public bool attemptSound(AudioClip clip, float pitchRange = 0.0f)
+    public bool attemptSound(AudioClip clip, float pitchRange = 0.0f, float startPos = 0.0f)
     {
         AudioSource source = findFreeAudioSource();
         if (source != default(AudioSource)) //found available source
         {
+            source.time = startPos;
+            //clip.samples
+            source.timeSamples = 2;
             source.volume = volume*MusicManager.instance.soundVolume;
             source.pitch = Random.Range(1 - pitchRange, 1 + pitchRange);
             source.clip = clip;

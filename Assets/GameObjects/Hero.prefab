@@ -275,6 +275,10 @@ MonoBehaviour:
   sharedLocationGO: {fileID: 1744222443058154, guid: 6028f2b6535711740800358bafa93bc7,
     type: 2}
   state: 0
+  messagesPanel: {fileID: 0}
+  messagePrefab: {fileID: 1682817401334076, guid: f076c6aa8a58d61479290f6b34ad953c,
+    type: 2}
+  flippedBubbleImage: {fileID: 21300000, guid: dd021ebb51d6455438146fc371fc6b01, type: 3}
 --- !u!114 &114472899149796128
 MonoBehaviour:
   m_ObjectHideFlags: 1

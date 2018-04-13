@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class InputHandler : NetworkBehaviour
@@ -49,10 +50,12 @@ public class InputHandler : NetworkBehaviour
     [SyncVar]
     private Color sphereColor;
     private Vector2 lastDirection;
-
+    public GameObject messagesPanel; //UI-panel where text messages appear
+    public GameObject messagePrefab; //Prefab for message popup
+    public Sprite flippedBubbleImage;
     private void Awake()
     {
-        if (messageDictionary != null)
+        if (messageDictionary == null)
         {
             messageDictionary = new Dictionary<TEXT_MESSAGES, string>();
             messageDictionary[TEXT_MESSAGES.GATHER_HERE] = "I found something";
@@ -74,6 +77,7 @@ public class InputHandler : NetworkBehaviour
         sphereMeshRenderer.GetPropertyBlock(propBlock);
         propBlock.SetColor("_Color", sphereColor);
         sphereMeshRenderer.SetPropertyBlock(propBlock);
+        messagesPanel = GameObject.Find("MessagePanel");
         if (hasAuthority)
         {
             transform.GetChild(0).gameObject.layer = 10; //For showing color on minimap
@@ -157,7 +161,10 @@ public class InputHandler : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
             Cmd_sendTextMessage(TEXT_MESSAGES.HELP);
+            
+
         }
     }
 
@@ -165,12 +172,12 @@ public class InputHandler : NetworkBehaviour
     void Cmd_createLocationSharer()
     {
         GameObject go = Instantiate(sharedLocationGO, transform.position, Quaternion.identity);
-        MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
-        transform.GetChild(0).GetComponent<MeshRenderer>().GetPropertyBlock(propBlock);
-        Color newCol = propBlock.GetColor("_Color");
-        go.GetComponent<SpriteRenderer>().color = newCol;
+        //MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
+        //transform.GetChild(0).GetComponent<MeshRenderer>().GetPropertyBlock(propBlock);
+        //Color newCol = propBlock.GetColor("_Color");
+        go.GetComponent<SpriteRenderer>().color = sphereColor;// newCol;
         NetworkServer.Spawn(go);
-        Rpc_setLocationSharerColor(go, newCol);
+        Rpc_setLocationSharerColor(go, sphereColor);
         float locationShareLifetime = 10.0f;
         Destroy(go, locationShareLifetime);
     }
@@ -184,7 +191,59 @@ public class InputHandler : NetworkBehaviour
     [Command]
     void Cmd_sendTextMessage(TEXT_MESSAGES messageType)
     {
+        Rpc_spawnChatBubble(messageType);
 
+    }
+
+    [ClientRpc]
+    void Rpc_spawnChatBubble(TEXT_MESSAGES messageType)
+    {
+        for (int i = 0; i < messagesPanel.transform.childCount; i++)
+        {
+            StartCoroutine(moveBubble(messagesPanel.transform.GetChild(i).gameObject));
+        }
+        //SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
+        GameObject messageGo = Instantiate(messagePrefab, messagesPanel.transform);
+        messageGo.transform.GetChild(0).GetComponent<Text>().text = messageDictionary[messageType];
+        messageGo.GetComponent<Image>().color = sphereColor;
+
+        if (hasAuthority)
+        {
+            messageGo.GetComponent<RectTransform>().pivot = new Vector2(0,0.5f);
+            messageGo.GetComponent<RectTransform>().anchorMax = messageGo.GetComponent<RectTransform>().pivot;
+            messageGo.GetComponent<RectTransform>().anchorMin = messageGo.GetComponent<RectTransform>().pivot;   
+            messageGo.GetComponent<Image>().sprite = flippedBubbleImage;
+            StartCoroutine(scaleBubble(messageGo));
+        }
+        Vector3 newPos = new Vector3(0, -190);
+        messageGo.GetComponent<RectTransform>().anchoredPosition = newPos;
+        StartCoroutine(scaleBubble(messageGo));
+
+    }
+    IEnumerator scaleBubble(GameObject bubble)
+    {
+        float scaleTime = 0.33f;
+        for (float f = 0; f < scaleTime; f += Time.deltaTime)
+        {
+            float pd = f / scaleTime;
+            Vector3 newScale = Vector3.one*pd;
+            bubble.transform.localScale = newScale;
+            yield return null;
+        }
+
+    }
+
+    IEnumerator moveBubble(GameObject bubble)
+    {
+        float moveTime = 0.33f;
+        Vector3 startPos = bubble.transform.position;
+        for (float f = 0; f < moveTime; f+=Time.deltaTime)
+        {
+            float pd = f / moveTime;
+            Vector3 newPos = startPos + (Vector3.up*120.0f*pd);
+            bubble.transform.position = newPos;
+            yield return null;
+        }
     }
 
     internal void setColor(Color color)

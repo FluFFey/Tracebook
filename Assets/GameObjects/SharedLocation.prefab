@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e939ccb29d9f1434f870edd3b1c93ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loopTime: 1
+  loopTime: 0.5
   bounceDist: 0.1
 --- !u!212 &212310502239368088
 SpriteRenderer:

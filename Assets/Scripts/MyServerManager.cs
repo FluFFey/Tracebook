@@ -50,7 +50,6 @@ public class MyServerManager : NetworkBehaviour {
     {
         networkManager.GetComponent<NetworkManager>().ServerChangeScene(sceneName);
         //Rpc_startGame();
-        print(NetworkServer.connections.Count);
         
 
         foreach (NetworkConnection connection in NetworkServer.connections)

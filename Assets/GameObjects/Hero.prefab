@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33419184132680578}
   - component: {fileID: 135850500492265344}
   - component: {fileID: 23327842112023502}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: minimapSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

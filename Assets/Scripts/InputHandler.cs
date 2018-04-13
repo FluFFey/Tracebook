@@ -25,7 +25,6 @@ public class InputHandler : NetworkBehaviour
 
     private static Dictionary<TEXT_MESSAGES,string> messageDictionary;
 
-
     enum MOVE_DIRECTION
     {
         UP = 1,
@@ -75,6 +74,10 @@ public class InputHandler : NetworkBehaviour
         sphereMeshRenderer.GetPropertyBlock(propBlock);
         propBlock.SetColor("_Color", sphereColor);
         sphereMeshRenderer.SetPropertyBlock(propBlock);
+        if (hasAuthority)
+        {
+            transform.GetChild(0).gameObject.layer = 10; //For showing color on minimap
+        }
     }
 
     bool isCollidingWithFloor(Vector3 point)
@@ -162,11 +165,21 @@ public class InputHandler : NetworkBehaviour
     void Cmd_createLocationSharer()
     {
         GameObject go = Instantiate(sharedLocationGO, transform.position, Quaternion.identity);
+        MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
+        transform.GetChild(0).GetComponent<MeshRenderer>().GetPropertyBlock(propBlock);
+        Color newCol = propBlock.GetColor("_Color");
+        go.GetComponent<SpriteRenderer>().color = newCol;
         NetworkServer.Spawn(go);
+        Rpc_setLocationSharerColor(go, newCol);
         float locationShareLifetime = 10.0f;
         Destroy(go, locationShareLifetime);
     }
 
+    [ClientRpc]
+    void Rpc_setLocationSharerColor(GameObject locationShareGO, Color newColor)
+    {
+        locationShareGO.GetComponent<SpriteRenderer>().color = newColor;
+    }
 
     [Command]
     void Cmd_sendTextMessage(TEXT_MESSAGES messageType)

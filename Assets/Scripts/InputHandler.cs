@@ -22,6 +22,7 @@ public class InputHandler : NetworkBehaviour
         HELP,
         RUN,
         GOOD_JOB,
+        RETURN,
         NO_OF_MESSAGE_TYPES
     }
 
@@ -30,6 +31,7 @@ public class InputHandler : NetworkBehaviour
         ROFLMAO,
         POO,
         MONKEY,
+        RETURN,
         NO_OF_EMOJIS
     }
 
@@ -269,11 +271,81 @@ public class InputHandler : NetworkBehaviour
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                currentSelectedObject = mod((int)currentSelectedObject - 2, numberToModWith); //sweet
+                switch (currentMenu)
+                {
+                    case PHONE_MENUS.MESSAGES:
+                        if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.RETURN)
+                        {
+                            currentSelectedObject = (int)TEXT_MESSAGES.RETURN-1;
+                        }
+                        else if (currentSelectedObject == 0 || currentSelectedObject == 1)
+                        {
+                            currentSelectedObject = (int)TEXT_MESSAGES.RETURN;
+                        }
+                        else
+                        {
+                            currentSelectedObject = mod((int)currentSelectedObject - 2, numberToModWith); //sweet
+                        }
+                        break;
+                    case PHONE_MENUS.EMOJI:
+                        if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
+                        {
+                            currentSelectedObject = (int)EMOJIS.RETURN - 1;
+                        }
+                        else if (currentSelectedObject == 0 || currentSelectedObject == 1)
+                        {
+                            currentSelectedObject = (int)EMOJIS.RETURN;
+                        }
+                        else
+                        {
+                            currentSelectedObject = mod((int)currentSelectedObject - 2, numberToModWith); //sweet
+                        }
+                        break;
+                    default:
+                        //isok. PHONE_MENUS.MAIN will go here
+                        currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+                        break;
+                }
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+                switch (currentMenu)
+                {
+                    case PHONE_MENUS.MESSAGES:
+                        if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.RETURN)
+                        {
+                            currentSelectedObject = 0;
+                        }
+                        else if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.GOOD_JOB)
+                        {
+                            currentSelectedObject = (int)TEXT_MESSAGES.RETURN;
+                        }
+                        else
+                        {
+                            currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+                        }
+                        break;
+                    case PHONE_MENUS.EMOJI:
+                        if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
+                        {
+                            currentSelectedObject = 0;
+                        }
+                        else if ((EMOJIS)currentSelectedObject == EMOJIS.MONKEY)
+                        {
+                            currentSelectedObject = (int)EMOJIS.RETURN;
+                        }
+                        else
+                        {
+                            currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+                        }
+                        break;
+                    default:
+                        //isok. PHONE_MENUS.MAIN will go here
+                        currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+                        break;
+                }
+                
+
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -315,25 +387,24 @@ public class InputHandler : NetworkBehaviour
                 break;
             case PHONE_MENUS.MESSAGES:
                 SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
-                Cmd_sendTextMessage((TEXT_MESSAGES)currentSelectedObject);
+                if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.RETURN)
+                {
+                    switchPhoneMenu(PHONE_MENUS.MAIN);
+                }
+                else
+                {
+                    Cmd_sendTextMessage((TEXT_MESSAGES)currentSelectedObject);
+                }
+                
                 break;
             case PHONE_MENUS.EMOJI: //TODO: implement 
-                switch (currentSelectedObject)
+                if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
                 {
-                    case (int)EMOJIS.MONKEY:
-                       // switchPhoneMenu(PHONE_MENUS.MESSAGES);
-                        //SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
-                        //Cmd_sendTextMessage(TEXT_MESSAGES.HELP);
-                        break;
-                    case (int)EMOJIS.POO:
-                      //  Cmd_createLocationSharer();
-                        break;
-                    case (int)EMOJIS.ROFLMAO:
-                        //switchPhoneMenu(PHONE_MENUS.EMOJI);
-                        //Cmd_createLocationSharer(); //TODO: FIX
-                        break;
-                    default:
-                        break;
+                    switchPhoneMenu(PHONE_MENUS.MAIN);
+                }
+                else
+                {
+                    //displayemoji((EMOJIS)currentSelectedObject); //TODO: fix
                 }
                 break;
             default:
@@ -416,7 +487,7 @@ public class InputHandler : NetworkBehaviour
         messageGo.transform.GetChild(0).GetComponent<Text>().text = messageDictionary[messageType];
         messageGo.GetComponent<Image>().color = sphereColor;
 
-        if (hasAuthority)
+        if (!hasAuthority)
         {
             messageGo.GetComponent<RectTransform>().pivot = new Vector2(0,0.5f);
             messageGo.GetComponent<RectTransform>().anchorMax = messageGo.GetComponent<RectTransform>().pivot;

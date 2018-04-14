@@ -21,9 +21,38 @@ public class InputHandler : NetworkBehaviour
         GATHER_HERE,
         HELP,
         RUN,
-        GOOD_JOB
+        GOOD_JOB,
+        NO_OF_MESSAGE_TYPES
     }
 
+    public enum EMOJIS
+    {
+        ROFLMAO,
+        POO,
+        MONKEY,
+        NO_OF_EMOJIS
+    }
+
+
+    public enum PHONE_OBJECTS
+    {
+        MESSAGE,
+        SHARE_LOCATION,
+        EMOJI,
+        NO_OF_OBJECTS //always at the end. don't set custom values to the ones above
+    }
+    int currentSelectedObject;
+
+    public enum PHONE_MENUS
+    {
+        MAIN,
+        MESSAGES,
+        //LOCATION,
+        EMOJI,
+        NO_OF_MENUS //always at the end. don't set custom values to the ones above
+    }
+
+    
     private static Dictionary<TEXT_MESSAGES,string> messageDictionary;
 
     enum MOVE_DIRECTION
@@ -53,11 +82,53 @@ public class InputHandler : NetworkBehaviour
     public GameObject messagesPanel; //UI-panel where text messages appear
     public GameObject messagePrefab; //Prefab for message popup
     public Sprite flippedBubbleImage;
-    public GameObject phoneCanvas;
+    private GameObject phone;
+    PHONE_MENUS currentMenu;
+    GameObject currentMenuObj;
+
+    private void updatePhoneHighlight()
+    {
+        GameObject menu = null;
+
+        int noOfMessages = 0;
+
+        switch (currentMenu)
+        {
+            case PHONE_MENUS.MAIN:
+                noOfMessages = (int)PHONE_OBJECTS.NO_OF_OBJECTS;
+                menu = phone.transform.GetChild(0).gameObject;
+                break;
+            case PHONE_MENUS.MESSAGES:
+                noOfMessages = (int)TEXT_MESSAGES.NO_OF_MESSAGE_TYPES;
+                menu = phone.transform.GetChild(1).gameObject;
+                break;
+            case PHONE_MENUS.EMOJI:
+                noOfMessages = (int)EMOJIS.NO_OF_EMOJIS;
+                menu = phone.transform.GetChild(2).gameObject;
+                break;
+            default:
+                print("invalid menu");
+                break;
+        }
+
+        MaterialPropertyBlock[] propBlocks = new MaterialPropertyBlock[noOfMessages];
+        for (int i = 0; i < noOfMessages; i++)
+        {
+            propBlocks[i] = new MaterialPropertyBlock();
+            menu.transform.GetChild(i).GetComponent<SpriteRenderer>().GetPropertyBlock(propBlocks[i]);
+
+            propBlocks[i].SetFloat("_Outline", 0);
+            if (i == currentSelectedObject)
+            {
+                propBlocks[i].SetFloat("_Outline", 1);
+            }
+            menu.transform.GetChild(i).GetComponent<SpriteRenderer>().SetPropertyBlock(propBlocks[i]);
+        }
+    }
 
     private void Awake()
     {
-        phoneCanvas = GameObject.Find("PhoneCanvas");
+        
         if (messageDictionary == null)
         {
             messageDictionary = new Dictionary<TEXT_MESSAGES, string>();
@@ -75,6 +146,12 @@ public class InputHandler : NetworkBehaviour
 
     private void Start()
     {
+        currentSelectedObject = 0;
+        phone = GameObject.Find("PhoneCanvas").transform.GetChild(0).gameObject;
+        //phoneCanvas.SetActive(false);
+        currentMenuObj = null;
+        phone.SetActive(false);
+
         MeshRenderer sphereMeshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
         MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
         sphereMeshRenderer.GetPropertyBlock(propBlock);
@@ -116,7 +193,6 @@ public class InputHandler : NetworkBehaviour
         {
             return;
         }
-
         switch (state)
         {
             case HERO_STATE.DISABLED:
@@ -132,53 +208,171 @@ public class InputHandler : NetworkBehaviour
         switch(moveDirection)
         {
             case (int)MOVE_DIRECTION.UP:
-                transform.eulerAngles = new Vector3(0, 0, -50.0f);
+                transform.eulerAngles = new Vector3(0, 0, 307.0f);
                 break;
             case (int)MOVE_DIRECTION.DOWN:
-                transform.eulerAngles = new Vector3(0, 0, 130.0f);
+                transform.eulerAngles = new Vector3(0, 0, 127.0f);
                 break;
             case (int)MOVE_DIRECTION.LEFT:
-                transform.eulerAngles = new Vector3(0, 0, 40.0f);
+                transform.eulerAngles = new Vector3(0, 0, 37.0f);
                 break;
             case (int)MOVE_DIRECTION.RIGHT:
-                transform.eulerAngles = new Vector3(0, 0, 200.0f);
+                transform.eulerAngles = new Vector3(0, 0, 217.0f);
                 break;
             case (int)MOVE_DIRECTION.UPLEFT:
-                transform.eulerAngles = new Vector3(0, 0, 355.0f);
+                transform.eulerAngles = new Vector3(0, 0, 352.0f);
                 break;
             case (int)MOVE_DIRECTION.UPRIGHT:
-                transform.eulerAngles = new Vector3(0, 0, 265.0f);
+                transform.eulerAngles = new Vector3(0, 0, 262.0f);
                 break;
             case (int)MOVE_DIRECTION.DOWNLEFT:
-                transform.eulerAngles = new Vector3(0, 0, 85.0f);
+                transform.eulerAngles = new Vector3(0, 0, 82.0f);
                 break;
             case (int)MOVE_DIRECTION.DOWNRIGHT:
-                transform.eulerAngles = new Vector3(0, 0, 175.0f);
+                transform.eulerAngles = new Vector3(0, 0, 172.0f);
                 break;
             default:
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Cmd_createLocationSharer();
-        }
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
-            Cmd_sendTextMessage(TEXT_MESSAGES.HELP);
+            findPhoneMenuAction();
+
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
-            if (phoneCanvas.activeSelf)
+            if (phone.activeSelf)
             {
-                phoneCanvas.SetActive(false);
+                phone.SetActive(false);
             }
             else
             {
-                phoneCanvas.SetActive(true);
+                phone.SetActive(true);
+                switchPhoneMenu(PHONE_MENUS.MAIN);
             }
         }
 
+        if (phone.activeSelf)
+        {
+            int numberToModWith = 0;
+            switch (currentMenu)
+            {
+                case PHONE_MENUS.MAIN:
+                    numberToModWith = (int)PHONE_OBJECTS.NO_OF_OBJECTS;
+                    break;
+                case PHONE_MENUS.MESSAGES:
+                    numberToModWith = (int)TEXT_MESSAGES.NO_OF_MESSAGE_TYPES;
+                    break;
+                case PHONE_MENUS.EMOJI:
+                    numberToModWith = (int)EMOJIS.NO_OF_EMOJIS;
+                    break;
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                currentSelectedObject = mod((int)currentSelectedObject - 2, numberToModWith); //sweet
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                currentSelectedObject = mod((int)currentSelectedObject - 1, numberToModWith); //sweet
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                currentSelectedObject = (((int)currentSelectedObject + 1) % numberToModWith); //sweet
+            }
+            updatePhoneHighlight();
+        }
+
+    }
+
+    private void findPhoneMenuAction()
+    {
+        PHONE_MENUS menuAtTimeOfAction = currentMenu;
+        switch(menuAtTimeOfAction)
+        {
+            case PHONE_MENUS.MAIN:
+                switch (currentSelectedObject)
+                {
+
+                    case (int)PHONE_OBJECTS.MESSAGE:
+                        switchPhoneMenu(PHONE_MENUS.MESSAGES);
+                        //SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
+                        //Cmd_sendTextMessage(TEXT_MESSAGES.HELP);
+                        break;
+                    case (int)PHONE_OBJECTS.SHARE_LOCATION:
+                        Cmd_createLocationSharer();
+                        break;
+                    case (int)PHONE_OBJECTS.EMOJI:
+                        switchPhoneMenu(PHONE_MENUS.EMOJI);
+                        //Cmd_createLocationSharer(); //TODO: FIX
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case PHONE_MENUS.MESSAGES:
+                SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
+                Cmd_sendTextMessage((TEXT_MESSAGES)currentSelectedObject);
+                break;
+            case PHONE_MENUS.EMOJI: //TODO: implement 
+                switch (currentSelectedObject)
+                {
+                    case (int)EMOJIS.MONKEY:
+                       // switchPhoneMenu(PHONE_MENUS.MESSAGES);
+                        //SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
+                        //Cmd_sendTextMessage(TEXT_MESSAGES.HELP);
+                        break;
+                    case (int)EMOJIS.POO:
+                      //  Cmd_createLocationSharer();
+                        break;
+                    case (int)EMOJIS.ROFLMAO:
+                        //switchPhoneMenu(PHONE_MENUS.EMOJI);
+                        //Cmd_createLocationSharer(); //TODO: FIX
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void switchPhoneMenu(PHONE_MENUS newMenu)
+    {
+        if (currentMenuObj !=null)
+        {
+            currentMenuObj.SetActive(false);
+        }
+        currentMenu = newMenu;
+        currentSelectedObject = 0;
+        switch (newMenu)
+        {
+            case PHONE_MENUS.MAIN:
+                phone.transform.GetChild(0).gameObject.SetActive(true);
+                currentMenuObj = phone.transform.GetChild(0).gameObject;                
+                break;
+            case PHONE_MENUS.MESSAGES:
+                phone.transform.GetChild(1).gameObject.SetActive(true);
+                currentMenuObj = phone.transform.GetChild(1).gameObject;
+                break;
+            case PHONE_MENUS.EMOJI:
+                phone.transform.GetChild(2).gameObject.SetActive(true);
+                currentMenuObj = phone.transform.GetChild(2).gameObject;
+                break;
+            default:
+                print("invalid phonemenu");
+                break;
+        }
+    }
+
+    //TRUE modulo. works properly for negative numbers
+    int mod(int a, int n)
+    {
+        return ((a % n) + n) % n;
     }
 
     [Command]
@@ -218,6 +412,7 @@ public class InputHandler : NetworkBehaviour
         }
         //SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
         GameObject messageGo = Instantiate(messagePrefab, messagesPanel.transform);
+
         messageGo.transform.GetChild(0).GetComponent<Text>().text = messageDictionary[messageType];
         messageGo.GetComponent<Image>().color = sphereColor;
 
@@ -232,8 +427,29 @@ public class InputHandler : NetworkBehaviour
         Vector3 newPos = new Vector3(0, -190);
         messageGo.GetComponent<RectTransform>().anchoredPosition = newPos;
         StartCoroutine(scaleBubble(messageGo));
-
+        StartCoroutine(destroyBubbleOverTime(messageGo));
     }
+
+
+    IEnumerator destroyBubbleOverTime(GameObject bubble)
+    {
+        yield return new WaitForSeconds(4.0f);
+        float fadeTime = 2.0f;
+        Color newBubbleCol = bubble.GetComponent<Image>().color;
+        Color newTextCol = bubble.transform.GetChild(0).GetComponent<Text>().color;
+        for (float f=0; f< fadeTime; f +=Time.deltaTime)
+        {
+            float pd = f / fadeTime;
+            //Color newColor = startBubbleCol;
+            newBubbleCol.a = 1 - pd;
+            newTextCol.a = 1 - pd;
+            bubble.GetComponent<Image>().color = newBubbleCol;
+            bubble.transform.GetChild(0).GetComponent<Text>().color = newTextCol;
+            yield return null;
+        }
+        Destroy(bubble);
+    }
+
     IEnumerator scaleBubble(GameObject bubble)
     {
         float scaleTime = 0.33f;
@@ -244,7 +460,7 @@ public class InputHandler : NetworkBehaviour
             bubble.transform.localScale = newScale;
             yield return null;
         }
-
+        bubble.transform.localScale = Vector3.one;
     }
 
     IEnumerator moveBubble(GameObject bubble)
@@ -255,7 +471,10 @@ public class InputHandler : NetworkBehaviour
         {
             float pd = f / moveTime;
             Vector3 newPos = startPos + (Vector3.up*120.0f*pd);
-            bubble.transform.position = newPos;
+            if (bubble != null) //might be destroyed during movement from timeout
+            {
+                bubble.transform.position = newPos;
+            }
             yield return null;
         }
     }
@@ -267,7 +486,7 @@ public class InputHandler : NetworkBehaviour
 
     private void updateCamera()
     {
-        Camera.main.GetComponent<CameraScript>().targetOffset = newVelocity.normalized*1.2f;
+        Camera.main.GetComponent<CameraScript>().targetOffset = newVelocity.normalized*0.0f;
     }
 
     public void changeHeroState(HERO_STATE newState)
@@ -292,6 +511,14 @@ public class InputHandler : NetworkBehaviour
     {
         if(!hasAuthority)
         {
+            return;
+        }
+
+        if (phone.activeSelf)
+        {
+            moveDirection = 0;
+            newVelocity = Vector2.zero;
+            handleVelocity();
             return;
         }
         fixedDt = TimeManager.instance.fixedGameDeltaTime;

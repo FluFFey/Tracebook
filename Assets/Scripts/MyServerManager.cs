@@ -41,12 +41,6 @@ public class MyServerManager : NetworkBehaviour {
     {
 
 	}
-	
-    void OnPlayerConnected(NetworkPlayer player)
-    {
-        
-        //print(player.);
-    }
 
     public void changeScene(string sceneName)
     {

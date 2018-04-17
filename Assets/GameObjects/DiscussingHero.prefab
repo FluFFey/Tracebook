@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33367449513879588}
   - component: {fileID: 135821556767737604}
   - component: {fileID: 23127290327379738}
-  - component: {fileID: 114190123322358942}
   m_Layer: 0
   m_Name: minimapSphere
   m_TagString: Untagged
@@ -260,38 +259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: 0.5
---- !u!114 &114190123322358942
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1209000857337656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 5
-    i1: 230
-    i2: 202
-    i3: 213
-    i4: 130
-    i5: 248
-    i6: 125
-    i7: 196
-    i8: 106
-    i9: 210
-    i10: 77
-    i11: 161
-    i12: 39
-    i13: 17
-    i14: 101
-    i15: 160
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114700684389753946
 MonoBehaviour:
   m_ObjectHideFlags: 1

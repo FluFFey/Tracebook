@@ -157,7 +157,16 @@ public class InputHandler : NetworkBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         sc = GetComponent<SoundCaller>();
         lastDirection = Vector2.right;
-        
+        disableFromMiniMapIfNotLocalPlayer();
+
+    }
+
+    public void disableFromMiniMapIfNotLocalPlayer()
+    {
+        if (!hasAuthority)
+        {
+            gameObject.layer = 0;
+        }
     }
 
     private void Start()

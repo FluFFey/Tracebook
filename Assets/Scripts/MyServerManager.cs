@@ -85,9 +85,13 @@ public class MyServerManager : NetworkBehaviour {
             //sphereMeshRenderer.GetPropertyBlock(propBlock);
             //propBlock.SetColor("_Color", playerColors[playerNo]);
             //sphereMeshRenderer.SetPropertyBlock(propBlock);
-
+            Vector3 newPos = go.transform.position;
+            newPos.x += (playerNo/2) * 2;
+            newPos.y += (playerNo % 2) * 2;
+            go.transform.position = newPos;
             //Now that object is on server, propagate to all clients
             NetworkServer.SpawnWithClientAuthority(go, connection);
+            
             Rpc_initiateScene(go);
         }
         else

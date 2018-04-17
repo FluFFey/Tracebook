@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61950376206932528}
   - component: {fileID: 114615292384703090}
   m_Layer: 0
-  m_Name: wincon
+  m_Name: wincondition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

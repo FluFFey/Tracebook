@@ -126,7 +126,6 @@ public class CameraScript : MonoBehaviour
             float distanceFromTarget = distanceVector.magnitude;
             transform.Translate(new Vector3(distanceVector.x, distanceVector.y, 0) * distanceFromTarget * followSpeed * TimeManager.instance.fixedGameDeltaTime);
         }
-        
 	}
 
     void OnGUI()

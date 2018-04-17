@@ -279,8 +279,6 @@ public class InputHandler : NetworkBehaviour
             currentSelectedObject = -1;
             foreach (MouseOverObj childTransform in phone.transform.GetChild(menuNo).GetComponentsInChildren<MouseOverObj>())
             {
-                print(menuNo);
-                print(count);
                 if (phone.transform.GetChild(menuNo).GetChild(count).GetComponent<MouseOverObj>()!=null &&
                     phone.transform.GetChild(menuNo).GetChild(count).GetComponent<MouseOverObj>().isMouseOver)
                 {

@@ -72,15 +72,12 @@ public class MyServerManager : NetworkBehaviour {
             GameObject go;
             if (SceneManager.GetActiveScene().name == "Discussion")
             {
-                print("here");
                 go = Instantiate(discussingPlayerPrefab);
             }
             else
             {
                 go = Instantiate(playerCharacterPrefab);
             }
-            
-            
 
             go.GetComponent<PropBlockNetworkColorSetter>().setColor(playerColors[playerNo]);
             //MeshRenderer sphereMeshRenderer = go.transform.GetChild(0).GetComponent<MeshRenderer>();
@@ -114,6 +111,11 @@ public class MyServerManager : NetworkBehaviour {
         }
     }
 
+    public bool amIServer()
+    {
+        return isServer;
+    }
+
     //[Command]
     //void Cmd_spawnHero(int i)
     //{
@@ -125,6 +127,11 @@ public class MyServerManager : NetworkBehaviour {
     //    //Now that object is on server, propagate to all clients
     //    NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
     //}
+
+    public int getConnectionCount()
+    {
+        return NetworkServer.connections.Count;
+    }
 
     // Update is called once per frame
     void Update ()

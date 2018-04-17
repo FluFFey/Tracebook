@@ -8,6 +8,7 @@ public class WinCondition : NetworkBehaviour {
 
     BoxCollider2D collider;
     List<GameObject> players = new List<GameObject>();
+    bool sceneChangeInitiated = false;
 	// Use this for initialization
 	void Start () {
         collider = GetComponent<BoxCollider2D>();
@@ -24,9 +25,11 @@ public class WinCondition : NetworkBehaviour {
             }
 
             var connectionCount = MyServerManager.instance.getConnectionCount();
-            if (players.Count == MyServerManager.instance.getConnectionCount())
+            if (players.Count == MyServerManager.instance.getConnectionCount() &&
+                 !sceneChangeInitiated)
             {
                 MyServerManager.instance.changeScene("Discussion");
+                sceneChangeInitiated = true;
             }
         }
 	}

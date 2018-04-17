@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 114070508430413592}
   - component: {fileID: 114899313042998966}
   - component: {fileID: 114700684389753946}
+  - component: {fileID: 114031974881872470}
   m_Layer: 0
   m_Name: DiscussingHero
   m_TagString: Player
@@ -246,6 +247,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114031974881872470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369016952795818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45b78f0a2467b6469d85a8d507aed91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114070508430413592
 MonoBehaviour:
   m_ObjectHideFlags: 1

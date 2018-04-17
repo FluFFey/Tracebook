@@ -107,8 +107,15 @@ Shader "UI/minimap"
 				float c = sqrt(a*a + b*b);
 				if (c > 0.46f)
 				{
+					//discard; //for circle discarding
+				}
+				if (IN.texcoord.x > 0.875f || IN.texcoord.x < 0.125f)
+				{
 					discard;
 				}
+				//a = IN.texcoord.x 
+				//b = IN.texcoord.y
+
 				
 				return color;
 			}

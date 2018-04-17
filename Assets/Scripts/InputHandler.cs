@@ -35,6 +35,15 @@ public class InputHandler : NetworkBehaviour
         NO_OF_EMOJIS
     }
 
+    public enum LOCATION_BUTTONS
+    {
+        SHARE_LOCATION,
+        ZOOM_IN,
+        ZOOM_OUT,
+        RETURN,
+        NO_OF_BUTTONS
+    }
+
 
     public enum PHONE_OBJECTS
     {
@@ -49,7 +58,7 @@ public class InputHandler : NetworkBehaviour
     {
         MAIN,
         MESSAGES,
-        //LOCATION,
+        LOCATION,
         EMOJI,
         NO_OF_MENUS //always at the end. don't set custom values to the ones above
     }
@@ -86,14 +95,15 @@ public class InputHandler : NetworkBehaviour
     private GameObject phone;
     PHONE_MENUS currentMenu;
     GameObject currentMenuObj;
-
+    private float mapZoom = 1; //Don't think too much about this one
+    private GameObject zoomSliderImg;
     private void updatePhoneHighlight()
     {
         GameObject menu = null;
 
         int noOfMessages = 0;
 
-        switch (currentMenu)
+        switch (currentMenu) //when updating this, remember to have buttons first in the hierarchy
         {
             case PHONE_MENUS.MAIN:
                 noOfMessages = (int)PHONE_OBJECTS.NO_OF_OBJECTS;
@@ -103,10 +113,15 @@ public class InputHandler : NetworkBehaviour
                 noOfMessages = (int)TEXT_MESSAGES.NO_OF_MESSAGE_TYPES;
                 menu = phone.transform.GetChild(1).gameObject;
                 break;
-            case PHONE_MENUS.EMOJI:
-                noOfMessages = (int)EMOJIS.NO_OF_EMOJIS;
+            case PHONE_MENUS.LOCATION:
+                noOfMessages = (int)LOCATION_BUTTONS.NO_OF_BUTTONS;
                 menu = phone.transform.GetChild(2).gameObject;
                 break;
+            case PHONE_MENUS.EMOJI:
+                noOfMessages = (int)EMOJIS.NO_OF_EMOJIS;
+                menu = phone.transform.GetChild(3).gameObject;
+                break;
+            //when updating this, remember to have buttons first in the hierarchy
             default:
                 print("invalid menu");
                 break;
@@ -149,10 +164,10 @@ public class InputHandler : NetworkBehaviour
     {
         currentSelectedObject = 0;
         phone = GameObject.Find("PhoneCanvas").transform.GetChild(0).gameObject;
+        zoomSliderImg = phone.transform.GetChild(2).GetChild(5).GetChild(2).gameObject; //This is fine
         //phoneCanvas.SetActive(false);
-        currentMenuObj = null;
-        phone.SetActive(false);
-
+        currentMenuObj = phone.transform.GetChild(0).gameObject;
+        //phone.SetActive(false);
 
         messagesPanel = GameObject.Find("MessagePanel");
         if (hasAuthority)
@@ -231,125 +246,152 @@ public class InputHandler : NetworkBehaviour
             default:
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetMouseButtonUp(0))
         {
-            findPhoneMenuAction();
+            if (currentSelectedObject != -1)
+            {
+                findPhoneMenuAction();
+            }
+            
+        }
+        //if (Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    findPhoneMenuAction();
 
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (phone.activeSelf)
-            {
-                phone.SetActive(false);
-            }
-            else
-            {
-                phone.SetActive(true);
-                switchPhoneMenu(PHONE_MENUS.MAIN);
-            }
-        }
+        //}
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    if (phone.activeSelf)
+        //    {
+        //        phone.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        phone.SetActive(true);
+        //        switchPhoneMenu(PHONE_MENUS.MAIN);
+        //    }
+        //}
 
         if (phone.activeSelf)
         {
-            int numberToModWith = 0;
-            switch (currentMenu)
+            int menuNo = (int)currentMenu;
+            int count = 0;
+            currentSelectedObject = -1;
+            foreach (MouseOverObj childTransform in phone.transform.GetChild(menuNo).GetComponentsInChildren<MouseOverObj>())
             {
-                case PHONE_MENUS.MAIN:
-                    numberToModWith = (int)PHONE_OBJECTS.NO_OF_OBJECTS;
-                    break;
-                case PHONE_MENUS.MESSAGES:
-                    numberToModWith = (int)TEXT_MESSAGES.NO_OF_MESSAGE_TYPES;
-                    break;
-                case PHONE_MENUS.EMOJI:
-                    numberToModWith = (int)EMOJIS.NO_OF_EMOJIS;
-                    break;
-            }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                switch (currentMenu)
+                print(menuNo);
+                print(count);
+                if (phone.transform.GetChild(menuNo).GetChild(count).GetComponent<MouseOverObj>()!=null &&
+                    phone.transform.GetChild(menuNo).GetChild(count).GetComponent<MouseOverObj>().isMouseOver)
                 {
-                    case PHONE_MENUS.MESSAGES:
-                        if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.RETURN)
-                        {
-                            currentSelectedObject = (int)TEXT_MESSAGES.RETURN-1;
-                        }
-                        else if (currentSelectedObject == 0 || currentSelectedObject == 1)
-                        {
-                            currentSelectedObject = (int)TEXT_MESSAGES.RETURN;
-                        }
-                        else
-                        {
-                            currentSelectedObject = mod((int)currentSelectedObject - 2, numberToModWith); //sweet
-                        }
-                        break;
-                    case PHONE_MENUS.EMOJI:
-                        if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
-                        {
-                            currentSelectedObject = (int)EMOJIS.RETURN - 1;
-                        }
-                        else if (currentSelectedObject == 0 || currentSelectedObject == 1)
-                        {
-                            currentSelectedObject = (int)EMOJIS.RETURN;
-                        }
-                        else
-                        {
-                            currentSelectedObject = mod((int)currentSelectedObject - 2, numberToModWith); //sweet
-                        }
-                        break;
-                    default:
-                        //isok. PHONE_MENUS.MAIN will go here
-                        currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
-                        break;
+                    currentSelectedObject = count;
+                    phone.transform.GetChild(menuNo).GetChild(count).GetComponent<MouseOverObj>().isMouseOver = false;
                 }
+                count++;
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                switch (currentMenu)
-                {
-                    case PHONE_MENUS.MESSAGES:
-                        if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.RETURN)
-                        {
-                            currentSelectedObject = 0;
-                        }
-                        else if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.GOOD_JOB)
-                        {
-                            currentSelectedObject = (int)TEXT_MESSAGES.RETURN;
-                        }
-                        else
-                        {
-                            currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
-                        }
-                        break;
-                    case PHONE_MENUS.EMOJI:
-                        if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
-                        {
-                            currentSelectedObject = 0;
-                        }
-                        else if ((EMOJIS)currentSelectedObject == EMOJIS.MONKEY)
-                        {
-                            currentSelectedObject = (int)EMOJIS.RETURN;
-                        }
-                        else
-                        {
-                            currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
-                        }
-                        break;
-                    default:
-                        //isok. PHONE_MENUS.MAIN will go here
-                        currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
-                        break;
-                }
-                
+            updatePhoneHighlight();
 
-            }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                currentSelectedObject = mod((int)currentSelectedObject - 1, numberToModWith); //sweet
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                currentSelectedObject = (((int)currentSelectedObject + 1) % numberToModWith); //sweet
-            }
+
+            //int numberToModWith = 0;
+            //switch (currentMenu)
+            //{
+            //    case PHONE_MENUS.MAIN:
+            //        numberToModWith = (int)PHONE_OBJECTS.NO_OF_OBJECTS;
+            //        break;
+            //    case PHONE_MENUS.MESSAGES:
+            //        numberToModWith = (int)TEXT_MESSAGES.NO_OF_MESSAGE_TYPES;
+            //        break;
+            //    case PHONE_MENUS.EMOJI:
+            //        numberToModWith = (int)EMOJIS.NO_OF_EMOJIS;
+            //        break;
+            //}
+
+            //if (Input.GetKeyDown(KeyCode.UpArrow))
+            //{
+            //    switch (currentMenu)
+            //    {
+            //        case PHONE_MENUS.MESSAGES:
+            //            if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.RETURN)
+            //            {
+            //                currentSelectedObject = (int)TEXT_MESSAGES.RETURN-1;
+            //            }
+            //            else if (currentSelectedObject == 0 || currentSelectedObject == 1)
+            //            {
+            //                currentSelectedObject = (int)TEXT_MESSAGES.RETURN;
+            //            }
+            //            else
+            //            {
+            //                currentSelectedObject = mod((int)currentSelectedObject - 2, numberToModWith); //sweet
+            //            }
+            //            break;
+            //        case PHONE_MENUS.EMOJI:
+            //            if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
+            //            {
+            //                currentSelectedObject = (int)EMOJIS.RETURN - 1;
+            //            }
+            //            else if (currentSelectedObject == 0 || currentSelectedObject == 1)
+            //            {
+            //                currentSelectedObject = (int)EMOJIS.RETURN;
+            //            }
+            //            else
+            //            {
+            //                currentSelectedObject = mod((int)currentSelectedObject - 2, numberToModWith); //sweet
+            //            }
+            //            break;
+            //        default:
+            //            //isok. PHONE_MENUS.MAIN will go here
+            //            currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+            //            break;
+            //    }
+            //}
+            //if (Input.GetKeyDown(KeyCode.DownArrow))
+            //{
+            //    switch (currentMenu)
+            //    {
+            //        case PHONE_MENUS.MESSAGES:
+            //            if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.RETURN)
+            //            {
+            //                currentSelectedObject = 0;
+            //            }
+            //            else if ((TEXT_MESSAGES)currentSelectedObject == TEXT_MESSAGES.GOOD_JOB)
+            //            {
+            //                currentSelectedObject = (int)TEXT_MESSAGES.RETURN;
+            //            }
+            //            else
+            //            {
+            //                currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+            //            }
+            //            break;
+            //        case PHONE_MENUS.EMOJI:
+            //            if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
+            //            {
+            //                currentSelectedObject = 0;
+            //            }
+            //            else if ((EMOJIS)currentSelectedObject == EMOJIS.MONKEY)
+            //            {
+            //                currentSelectedObject = (int)EMOJIS.RETURN;
+            //            }
+            //            else
+            //            {
+            //                currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+            //            }
+            //            break;
+            //        default:
+            //            //isok. PHONE_MENUS.MAIN will go here
+            //            currentSelectedObject = mod((int)currentSelectedObject + 2, numberToModWith); //sweet
+            //            break;
+            //    }
+
+
+            //}
+            //if (Input.GetKeyDown(KeyCode.LeftArrow))
+            //{
+            //    currentSelectedObject = mod((int)currentSelectedObject - 1, numberToModWith); //sweet
+            //}
+            //if (Input.GetKeyDown(KeyCode.RightArrow))
+            //{
+            //    currentSelectedObject = (((int)currentSelectedObject + 1) % numberToModWith); //sweet
+            //}
             updatePhoneHighlight();
         }
 
@@ -366,15 +408,12 @@ public class InputHandler : NetworkBehaviour
 
                     case (int)PHONE_OBJECTS.MESSAGE:
                         switchPhoneMenu(PHONE_MENUS.MESSAGES);
-                        //SoundManager.instance.playSound(SoundManager.SOUNDS.NEW_MESSAGE);
-                        //Cmd_sendTextMessage(TEXT_MESSAGES.HELP);
                         break;
                     case (int)PHONE_OBJECTS.SHARE_LOCATION:
-                        Cmd_createLocationSharer();
+                        switchPhoneMenu(PHONE_MENUS.LOCATION);
                         break;
                     case (int)PHONE_OBJECTS.EMOJI:
                         switchPhoneMenu(PHONE_MENUS.EMOJI);
-                        //Cmd_createLocationSharer(); //TODO: FIX
                         break;
                     default:
                         break;
@@ -389,8 +428,7 @@ public class InputHandler : NetworkBehaviour
                 else
                 {
                     Cmd_sendTextMessage((TEXT_MESSAGES)currentSelectedObject);
-                }
-                
+                }                
                 break;
             case PHONE_MENUS.EMOJI: //TODO: implement 
                 if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
@@ -400,6 +438,30 @@ public class InputHandler : NetworkBehaviour
                 else
                 {
                     //displayemoji((EMOJIS)currentSelectedObject); //TODO: fix
+                }
+                break;
+            case PHONE_MENUS.LOCATION:
+                switch (currentSelectedObject)
+                {
+                    case (int)LOCATION_BUTTONS.SHARE_LOCATION:
+                        Cmd_createLocationSharer();
+                        break;
+                    case (int)LOCATION_BUTTONS.ZOOM_IN:
+                        mapZoom += 0.33f;
+                        mapZoom = mapZoom > 1.0f ? 1.0f : mapZoom;
+                        StartCoroutine(GameObject.Find("minimapCam").GetComponent<MinimapScript>().changeZoom(mapZoom, zoomSliderImg));
+                        break;
+                    case (int)LOCATION_BUTTONS.ZOOM_OUT:
+                        mapZoom -= 0.33f;
+                        mapZoom = mapZoom < 0.0f ? 0.0f : mapZoom;
+                        StartCoroutine(GameObject.Find("minimapCam").GetComponent<MinimapScript>().changeZoom(mapZoom, zoomSliderImg));
+                        break;
+                    case (int)LOCATION_BUTTONS.RETURN:
+                        switchPhoneMenu(PHONE_MENUS.MAIN);
+                        break;
+                    default:
+                        print("Choky");
+                        break;
                 }
                 break;
             default:
@@ -426,6 +488,10 @@ public class InputHandler : NetworkBehaviour
                 currentMenuObj = phone.transform.GetChild(1).gameObject;
                 break;
             case PHONE_MENUS.EMOJI:
+                phone.transform.GetChild(3).gameObject.SetActive(true);
+                currentMenuObj = phone.transform.GetChild(3).gameObject;
+                break;
+            case PHONE_MENUS.LOCATION:
                 phone.transform.GetChild(2).gameObject.SetActive(true);
                 currentMenuObj = phone.transform.GetChild(2).gameObject;
                 break;
@@ -467,7 +533,6 @@ public class InputHandler : NetworkBehaviour
     void Cmd_sendTextMessage(TEXT_MESSAGES messageType)
     {
         Rpc_spawnChatBubble(messageType);
-
     }
 
     [ClientRpc]
@@ -578,13 +643,13 @@ public class InputHandler : NetworkBehaviour
             return;
         }
 
-        if (phone.activeSelf)
-        {
-            moveDirection = 0;
-            newVelocity = Vector2.zero;
-            handleVelocity();
-            return;
-        }
+        //if (phone.activeSelf) //For keyboard input
+        //{
+        //    moveDirection = 0;
+        //    newVelocity = Vector2.zero;
+        //    handleVelocity();
+        //    return;
+        //}
         fixedDt = TimeManager.instance.fixedGameDeltaTime;
 
         newVelocity = Vector2.zero;

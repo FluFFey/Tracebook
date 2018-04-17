@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 114620002548321808}
   - component: {fileID: 114472899149796128}
   - component: {fileID: 114849994102604956}
+  - component: {fileID: 114421420975387576}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Player
@@ -278,6 +279,17 @@ MonoBehaviour:
   messagePrefab: {fileID: 1682817401334076, guid: f076c6aa8a58d61479290f6b34ad953c,
     type: 2}
   flippedBubbleImage: {fileID: 21300000, guid: dd021ebb51d6455438146fc371fc6b01, type: 3}
+--- !u!114 &114421420975387576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1827641440283114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45b78f0a2467b6469d85a8d507aed91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114472899149796128
 MonoBehaviour:
   m_ObjectHideFlags: 1

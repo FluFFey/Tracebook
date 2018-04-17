@@ -102,6 +102,7 @@ public class MyServerManager : NetworkBehaviour {
     [ClientRpc]
     void Rpc_initiateScene(GameObject go)
     {
+
         if (go.GetComponent<InputHandler>() != null && 
             go.GetComponent<InputHandler>().hasAuthority)
         {

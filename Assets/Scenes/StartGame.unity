@@ -362,7 +362,7 @@ Prefab:
     - target: {fileID: 114559489690760406, guid: fa422de482b1ea04b9051b57ab9e5709,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4778960233399958, guid: fa422de482b1ea04b9051b57ab9e5709, type: 2}
       propertyPath: m_LocalPosition.x
@@ -411,6 +411,12 @@ Prefab:
       propertyPath: m_SpawnPrefabs.Array.data[1]
       value: 
       objectReference: {fileID: 1744222443058154, guid: 6028f2b6535711740800358bafa93bc7,
+        type: 2}
+    - target: {fileID: 114559489690760406, guid: fa422de482b1ea04b9051b57ab9e5709,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1369016952795818, guid: 05e6cad582f87dc46ad24da1271165a0,
         type: 2}
     m_RemovedComponents:
     - {fileID: 114619500624108098, guid: fa422de482b1ea04b9051b57ab9e5709, type: 2}
@@ -1061,6 +1067,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacterPrefab: {fileID: 1827641440283114, guid: 15eacf81588af1f43a34e71943ded612,
     type: 2}
+  discussingPlayerPrefab: {fileID: 1369016952795818, guid: 05e6cad582f87dc46ad24da1271165a0,
+    type: 2}
   networkManager: {fileID: 997372734}
 --- !u!114 &1195705770
 MonoBehaviour:
@@ -1119,6 +1127,7 @@ GameObject:
   - component: {fileID: 1773773671}
   - component: {fileID: 1773773670}
   - component: {fileID: 1773773673}
+  - component: {fileID: 1773773674}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -1190,6 +1199,23 @@ Transform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1773773673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1773773668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a3442aef7266b4b9a7a55b4925e526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  targetOffset: {x: 0, y: 0}
+  fadeColor: {r: 0, g: 0, b: 0, a: 0}
+  orthographicPlaySize: 3.5
+  defaultFadeTime: 0
+  followSpeed: 0.33
+--- !u!114 &1773773674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}

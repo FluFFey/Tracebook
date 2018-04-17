@@ -151,3 +151,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d77e6a482df9a3499c71c84a0b4c66a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCharacterPrefab: {fileID: 0}
+  networkManager: {fileID: 0}

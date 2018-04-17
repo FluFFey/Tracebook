@@ -8,6 +8,7 @@ public class MyServerManager : NetworkBehaviour {
 
     public static MyServerManager instance;
     public GameObject playerCharacterPrefab;
+    public GameObject discussingPlayerPrefab;
     public GameObject networkManager;
     Color[] playerColors;
     
@@ -68,10 +69,20 @@ public class MyServerManager : NetworkBehaviour {
         }
         if (connection.isReady)
         {
-            GameObject go = Instantiate(playerCharacterPrefab);
+            GameObject go;
+            if (SceneManager.GetActiveScene().name == "Discussion")
+            {
+                print("here");
+                go = Instantiate(discussingPlayerPrefab);
+            }
+            else
+            {
+                go = Instantiate(playerCharacterPrefab);
+            }
+            
             
 
-            go.GetComponent<InputHandler>().setColor(playerColors[playerNo]);
+            go.GetComponent<PropBlockNetworkColorSetter>().setColor(playerColors[playerNo]);
             //MeshRenderer sphereMeshRenderer = go.transform.GetChild(0).GetComponent<MeshRenderer>();
             //MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
             //sphereMeshRenderer.GetPropertyBlock(propBlock);
@@ -91,10 +102,14 @@ public class MyServerManager : NetworkBehaviour {
     [ClientRpc]
     void Rpc_initiateScene(GameObject go)
     {
-        if (go.GetComponent<InputHandler>().hasAuthority)
+        if (go.GetComponent<InputHandler>() != null && 
+            go.GetComponent<InputHandler>().hasAuthority)
         {
             Camera.main.GetComponent<CameraScript>().target = go;
-            GameObject.Find("minimapCam").GetComponent<MinimapScript>().target = go;
+            if (GameObject.Find("minimapCam") != null)
+            {
+                GameObject.Find("minimapCam").GetComponent<MinimapScript>().target = go;
+            }
         }
     }
 

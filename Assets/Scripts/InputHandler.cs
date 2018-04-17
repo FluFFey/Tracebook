@@ -79,7 +79,6 @@ public class InputHandler : NetworkBehaviour
     private SoundCaller sc;
     private Rigidbody2D rb2d;
     [SyncVar]
-    private Color sphereColor;
     private Vector2 lastDirection;
     public GameObject messagesPanel; //UI-panel where text messages appear
     public GameObject messagePrefab; //Prefab for message popup
@@ -154,11 +153,7 @@ public class InputHandler : NetworkBehaviour
         currentMenuObj = null;
         phone.SetActive(false);
 
-        MeshRenderer sphereMeshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
-        MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
-        sphereMeshRenderer.GetPropertyBlock(propBlock);
-        propBlock.SetColor("_Color", sphereColor);
-        sphereMeshRenderer.SetPropertyBlock(propBlock);
+
         messagesPanel = GameObject.Find("MessagePanel");
         if (hasAuthority)
         {
@@ -453,7 +448,8 @@ public class InputHandler : NetworkBehaviour
         //MaterialPropertyBlock propBlock = new MaterialPropertyBlock();
         //transform.GetChild(0).GetComponent<MeshRenderer>().GetPropertyBlock(propBlock);
         //Color newCol = propBlock.GetColor("_Color");
-        go.GetComponent<SpriteRenderer>().color = sphereColor;// newCol;
+        Color sphereColor = GetComponent<PropBlockNetworkColorSetter>().getColor();
+        go.GetComponent<SpriteRenderer>().color = sphereColor;
         NetworkServer.Spawn(go);
         Rpc_setLocationSharerColor(go, sphereColor);
         float locationShareLifetime = 10.0f;
@@ -485,7 +481,7 @@ public class InputHandler : NetworkBehaviour
         GameObject messageGo = Instantiate(messagePrefab, messagesPanel.transform);
 
         messageGo.transform.GetChild(0).GetComponent<Text>().text = messageDictionary[messageType];
-        messageGo.GetComponent<Image>().color = sphereColor;
+        messageGo.GetComponent<Image>().color = GetComponent<PropBlockNetworkColorSetter>().getColor();
 
         if (!hasAuthority)
         {
@@ -550,10 +546,7 @@ public class InputHandler : NetworkBehaviour
         }
     }
 
-    internal void setColor(Color color)
-    {
-        sphereColor = color;
-    }
+
 
     private void updateCamera()
     {

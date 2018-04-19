@@ -6,15 +6,25 @@ public class MouseOverObj : MonoBehaviour
 {
     public bool isMouseOver;
     public bool outlineOnMouseover;
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRenderer;
     private MaterialPropertyBlock propBlock;
 
     public bool lockedOutline;
+    
 
     void Awake()
     {
         propBlock = new MaterialPropertyBlock();
-        renderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void OnMouseEnter()
+    {
+        isMouseOver = true;
+        if (outlineOnMouseover)
+        {
+            addOutline();
+        }
     }
 
     void OnMouseOver()
@@ -35,16 +45,16 @@ public class MouseOverObj : MonoBehaviour
     }
     public void addOutline()
     {
-        renderer.GetPropertyBlock(propBlock);
+        spriteRenderer.GetPropertyBlock(propBlock);
         propBlock.SetFloat("_Outline", 1);
-        renderer.SetPropertyBlock(propBlock);
+        spriteRenderer.SetPropertyBlock(propBlock);
     }
 
     public void removeOutline()
     {
-        renderer.GetPropertyBlock(propBlock);
+        spriteRenderer.GetPropertyBlock(propBlock);
         propBlock.SetFloat("_Outline", 0);
-        renderer.SetPropertyBlock(propBlock);
+        spriteRenderer.SetPropertyBlock(propBlock);
     }
 
 }

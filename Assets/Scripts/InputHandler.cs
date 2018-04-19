@@ -28,12 +28,16 @@ public class InputHandler : NetworkBehaviour
 
     public enum EMOJIS
     {
+        SLY,
+        KISSY,
+        SNORE,
         ROFLMAO,
-        POO,
-        MONKEY,
         RETURN,
-        NO_OF_EMOJIS
+        NO_OF_EMOJIS, //technically  Number of selectable emojis
+        NEUTRAL
     }
+    public Sprite[] emojiSprites;
+    private static Dictionary<EMOJIS, Vector3> emojiPositions;
 
     public enum LOCATION_BUTTONS
     {
@@ -118,7 +122,7 @@ public class InputHandler : NetworkBehaviour
                 menu = phone.transform.GetChild(2).gameObject;
                 break;
             case PHONE_MENUS.EMOJI:
-                noOfMessages = (int)EMOJIS.NO_OF_EMOJIS;
+                noOfMessages = (int)EMOJIS.NO_OF_EMOJIS-1;
                 menu = phone.transform.GetChild(3).gameObject;
                 break;
             //when updating this, remember to have buttons first in the hierarchy
@@ -153,6 +157,24 @@ public class InputHandler : NetworkBehaviour
             messageDictionary[TEXT_MESSAGES.RUN] = "Run";
             messageDictionary[TEXT_MESSAGES.GOOD_JOB] = "Well done";
         }
+
+        if (emojiPositions == null)
+        {
+            emojiPositions = new Dictionary<EMOJIS, Vector3>();
+            emojiPositions[EMOJIS.SLY] = new Vector3(-0.018f, -0.082f, -0.11f);
+            emojiPositions[EMOJIS.KISSY] = new Vector3(0.088f, -0.168f, -0.11f);
+            emojiPositions[EMOJIS.SNORE] = new Vector3(-0.018f, -0.062f, -0.11f);
+            emojiPositions[EMOJIS.ROFLMAO] = new Vector3(-0.018f, -0.062f, -0.11f);
+            emojiPositions[EMOJIS.NEUTRAL] = new Vector3(0.00f, 0.06f, -0.11f);
+
+            //TODO: testing. positions gets wonky with above data
+            emojiPositions[EMOJIS.SLY] = new Vector3(0.0f, 0.0f, -0.11f);
+            emojiPositions[EMOJIS.KISSY] = new Vector3(0.0f, 0.0f, -0.11f);
+            emojiPositions[EMOJIS.SNORE] = new Vector3(0.0f, 0.0f, -0.11f);
+            emojiPositions[EMOJIS.ROFLMAO] = new Vector3(0.0f, 0.0f, -0.11f);
+            emojiPositions[EMOJIS.NEUTRAL] = new Vector3(0.0f, 0.0f, -0.11f);
+        }
+
         moveDirection = (int)MOVE_DIRECTION.LEFT;
         rb2d = GetComponent<Rigidbody2D>();
         sc = GetComponent<SoundCaller>();
@@ -208,10 +230,12 @@ public class InputHandler : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //still runs on all inputhandlers, not just ones you own
         //How to verify if I'm authorised to change object?
         if(!hasAuthority)
         {
+            transform.GetChild(1).transform.rotation = Quaternion.identity;
             return;
         }
         switch (state)
@@ -255,6 +279,7 @@ public class InputHandler : NetworkBehaviour
             default:
                 break;
         }
+        transform.GetChild(1).transform.rotation = Quaternion.identity;
         if (Input.GetMouseButtonUp(0))
         {
             if (currentSelectedObject != -1)
@@ -437,14 +462,14 @@ public class InputHandler : NetworkBehaviour
                     Cmd_sendTextMessage((TEXT_MESSAGES)currentSelectedObject);
                 }                
                 break;
-            case PHONE_MENUS.EMOJI: //TODO: implement 
+            case PHONE_MENUS.EMOJI:
                 if ((EMOJIS)currentSelectedObject == EMOJIS.RETURN)
                 {
                     switchPhoneMenu(PHONE_MENUS.MAIN);
                 }
                 else
                 {
-                    //displayemoji((EMOJIS)currentSelectedObject); //TODO: fix
+                    Cmd_displayEmoji((EMOJIS)currentSelectedObject);
                 }
                 break;
             case PHONE_MENUS.LOCATION:
@@ -474,6 +499,36 @@ public class InputHandler : NetworkBehaviour
             default:
                 break;
         }
+    }
+
+    [Command]
+    private void Cmd_displayEmoji(EMOJIS currentSelectedObject)
+    {
+        Rpc_displayEmoji(currentSelectedObject);
+    }
+
+    private Coroutine emojiCoroutine;
+
+    IEnumerator resetEmoji()
+    {
+        float emojiTime = 3.0f;
+        yield return new WaitForSeconds(emojiTime);
+        
+        //-2 because neutral is below the "emoji count" and "return" for other reasons. could maybe be handled differently
+        transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = emojiSprites[(int)EMOJIS.NEUTRAL-2];
+        transform.GetChild(1).GetComponent<SpriteRenderer>().transform.localPosition = emojiPositions[EMOJIS.NEUTRAL];
+    }
+
+    [ClientRpc]
+    void Rpc_displayEmoji(EMOJIS desiredEmoji)
+    {
+        transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = emojiSprites[(int)desiredEmoji];
+        transform.GetChild(1).GetComponent<SpriteRenderer>().transform.localPosition = emojiPositions[desiredEmoji];
+        if (emojiCoroutine != null)
+        {
+            StopCoroutine(emojiCoroutine);
+        }
+        emojiCoroutine = StartCoroutine(resetEmoji());
     }
 
     private void switchPhoneMenu(PHONE_MENUS newMenu)
@@ -645,7 +700,9 @@ public class InputHandler : NetworkBehaviour
 
     void FixedUpdate ()
     {
-        if(!hasAuthority)
+        //TODO: hack. emojis keep spinning because they are children of hero
+        transform.GetChild(1).transform.rotation = Quaternion.identity; 
+        if (!hasAuthority)
         {
             return;
         }

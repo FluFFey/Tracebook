@@ -80,7 +80,11 @@ public class MyServerManager : NetworkBehaviour {
             //propBlock.SetColor("_Color", playerColors[playerNo]);
             //sphereMeshRenderer.SetPropertyBlock(propBlock);
             Vector3 newPos = go.transform.position;
-            newPos.x += (playerNo/2) * 2;
+            if (SceneManager.GetActiveScene().name == "Discussion")
+            {
+                newPos = new Vector3(-37.6f, 4.2f, 0);
+            }
+                newPos.x += (playerNo/2) * 2;
             newPos.y += (playerNo % 2) * 2;
             go.transform.position = newPos;
             //Now that object is on server, propagate to all clients

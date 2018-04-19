@@ -6,12 +6,14 @@ using UnityEngine;
 
 public class WinCondition : NetworkBehaviour {
 
-    BoxCollider2D collider;
+    BoxCollider2D b2collider;
     List<GameObject> players = new List<GameObject>();
     bool sceneChangeInitiated = false;
+    Color oldCol;
 	// Use this for initialization
 	void Start () {
-        collider = GetComponent<BoxCollider2D>();
+        b2collider = GetComponent<BoxCollider2D>();
+        oldCol = GetComponent<SpriteRenderer>().color;
 	}
 	
 	// Update is called once per frame
@@ -36,6 +38,11 @@ public class WinCondition : NetworkBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.GetComponent<InputHandler>().hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().color = Color.green;
+        }
+        
         if(collision.gameObject.CompareTag("Player"))
         {
             players.Add(collision.gameObject);
@@ -45,6 +52,10 @@ public class WinCondition : NetworkBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.GetComponent<InputHandler>().hasAuthority)
+        {
+            GetComponent<SpriteRenderer>().color = oldCol;
+        }
         if (collision.gameObject.CompareTag("Player"))
         {
             players.Remove(collision.gameObject);

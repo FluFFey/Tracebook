@@ -89,18 +89,6 @@ public class TextPulse : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             case (int)SubMenu.BUTTONS.NEW_GAME:
                 StartCoroutine(startNewGame());
                 break;
-            case (int)SubMenu.BUTTONS.LEVEL_SELECT:
-                transform.parent.parent.GetChild(1).gameObject.SetActive(true); //hacky-ish but works
-                transform.parent.gameObject.SetActive(false);
-                break;
-            case (int)SubMenu.BUTTONS.SETTINGS:
-                transform.parent.parent.GetChild(2).gameObject.SetActive(true); //hacky-ish but works
-                transform.parent.gameObject.SetActive(false);
-                if (transform.parent.name =="PauseMenu") //TODO: fix this when reworking(menu stack?)
-                {
-                    transform.parent.parent.GetChild(2).gameObject.GetComponent<SubMenu>().buttonIDs[2] = SubMenu.BUTTONS.BACK_FROM_PLAYING_MENU;
-                }
-                break;
             case (int)SubMenu.BUTTONS.EXIT:
                 Application.Quit();
                 break;
